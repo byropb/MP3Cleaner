@@ -10,12 +10,12 @@ ________________________________________
  
 Installation and Launch
 1.	Install the JDK. If you haven't already, install JDK 17 or higher on your system.
-2.	Copy the application files. From the project package, copy the MP3Cleaner-0.0.1-SNAPSHOT.war file and the MP3Cleaner-shortcut to your desktop.
+2.	Copy the application files. From the project package (MP3Cleaner/documents/), copy the MP3Cleaner-0.0.1-SNAPSHOT.war file and the MP3Cleaner-shortcut to your desktop.
 3.	Launch the application. Double-click the MP3 Cleaner shortcut. This will start a local web server and automatically open the application's user interface in your default web browser.
-4.	Initial Setup. The first time you run the application, you'll be prompted to select the columns you want to be displayed. You can adjust these settings later from the Dashboard/Options menu.
+4.	Initial options setup. The first time you run the application, you'll be prompted to select the columns you want to be displayed. You can adjust these settings later from the Dashboard/Options menu.
 ________________________________________
 Using the Application
-The MP3 Cleaner offers two main functions: updating attributes and renaming files.
+The MP3 Cleaner offers two main functions: bulk updating attributes for MP3 files and renaming any files in directory with sequesnce count number added.
 Updating MP3 Attributes
 To update the metadata of your audio files, follow these steps:
 1.	From the dashboard, click on "MP3 attributes" to open the working panel.
