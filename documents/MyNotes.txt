@@ -1,0 +1,13 @@
+
+
+start project code:
+right-click run as java application: Mp3CleanerApplication.java
+
+java 17 required
+WAR start
+java -jar -Dspring.profiles.active=prod  C:\Data\MyPrograms\MyProjects\Projects\SpringBoot-Projects\MP3Cleaner\target\MP3Cleaner-0.0.1-SNAPSHOT.war
+
+full path to java 17
+"C:\Program Files\Java\jdk-17.0.2\bin\java.exe" -jar -Dspring.profiles.active=prod  C:\Data\MyPrograms\MyProjects\Projects\SpringBoot-Projects\MP3Cleaner\target\MP3Cleaner-0.0.1-SNAPSHOT.war
+
+
