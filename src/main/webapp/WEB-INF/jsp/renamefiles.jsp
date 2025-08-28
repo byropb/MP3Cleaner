@@ -99,12 +99,12 @@
 	}
 	function form_onsubmit() {
 		showObject('myModal');
-		writeStorage('mp3in_', inputPath);
 	}
 	function path_onchange() {
 		
 		var filetype = document.getElementById("filetype").value;
 		var serviceId = "/api/data_get?callerid=rename&filetype=".concat(filetype).concat("&dirPath=");
+		writeStorage('mp3in_', inputPath);
 		getAjaxData(serviceId, 'path', 'fileslist', null);
 		//getAjaxData('/api/data_get?dirPath=', 'path', 'fileslist', null);
 		

@@ -38,7 +38,9 @@ public class RenameAllFilesInDirectory {
 
 						StringBuffer buffer = new StringBuffer("");
 						String sequesnceId = String.format("%03d", Integer.valueOf(icount));
-						buffer.append(sequesnceId).append("-").append(model.getNewFileName()).append(suffix);
+						
+						//buffer.append(sequesnceId).append("-").append(model.getNewFileName()).append(suffix);
+						buffer.append(model.getNewFileName()).append("-").append(sequesnceId).append(suffix);
 
 						String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1).concat(buffer.toString());
 						File tempFile = new File(destPath);

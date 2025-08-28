@@ -24,14 +24,14 @@ import web.com.client.FileProcessor;
 
 @Controller
 
-public class MainController {
+public class Mp3Controller {
 
 	@Value("${server.servlet.context-path}")
 	private String mp3Context;
 	@Value("${server.port}")
 	private String myPort;
 
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(Mp3Controller.class);
 	private FileProcessor fileProcessor = new FileProcessor();
 	private AudioTagProcessor audioTagProcessor = new AudioTagProcessor();
 

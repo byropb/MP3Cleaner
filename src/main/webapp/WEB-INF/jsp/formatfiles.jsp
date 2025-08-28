@@ -116,10 +116,10 @@
 	}
 	function form_onsubmit() {
 		showObject('myModal');
-		writeStorage('mp3in_', );
 	}
 	function path_onchange() {
 		clearInputs(inputsList);
+		writeStorage('mp3in_', inputPath);
 		getAjaxData('/api/data_get?filetype=.mp3&dirPath=', 'path', 'fileslist', get_mp3attributes);
 	}
 
