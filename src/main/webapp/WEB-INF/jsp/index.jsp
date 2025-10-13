@@ -73,7 +73,7 @@ label {
               </td>
             </tr>
             <tr>
-              <td colspan='2' style='cursor: pointer; font-size: 12px; font-weight: bold' onclick="showObject('fieldoptions');">Options<img
+              <td colspan='2' style='cursor: pointer; font-size: 12px; font-weight: bold' onclick="showObject('fieldoptions', true);">Options<img
                 src='..${mp3Context}/images/gear.gif' style='width: 20px; vertical-align: middle;' />
               </td>
             </tr>
@@ -82,7 +82,7 @@ label {
                 <table id='fieldoptions' style='display: none; position: fixed;'>
                   <tr>
                     <td class='' style='text-align: center'>Select the details you want to display</td>
-                    <td class='close' onclick="showObject('fieldoptions');">&times;</td>
+                    <td class='close' onclick="showObject('fieldoptions', false);">&times;</td>
                   </tr>
                   <tr>
                     <td>
@@ -110,9 +110,9 @@ label {
                       <table style='width: 100%'>
                         <tr>
                           <td class='' colspan='' style='text-align: center;'><input type='button' value='OK' style='width: 80px'
-                            onclick="writeStorage('mp3_',fieldslist); showObject('fieldoptions');" /></td>
+                            onclick="writeStorage('mp3_',fieldslist); showObject('fieldoptions', false);" /></td>
                           <td class='' colspan='' style='text-align: center;'><input type='button' value='Cancel' style='width: 80px'
-                            onclick="showObject('fieldoptions');" /></td>
+                            onclick="showObject('fieldoptions', false);" /></td>
                         </tr>
                       </table>
                     </td>
@@ -134,7 +134,7 @@ label {
 			function form_submit(action) {
 				var form = document.getElementById("mp3cleaner");
 				if (null !== form) {
-					showObject("myModal");
+					showObject("myModal", true);
 					form.action = action;
 					form.submit();
 				}

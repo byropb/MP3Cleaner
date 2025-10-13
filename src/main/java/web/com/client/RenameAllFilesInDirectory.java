@@ -11,14 +11,16 @@ import com.spring.mp3.MP3CleanerModel;
 public class RenameAllFilesInDirectory {
 
 	private static final Logger logger = LoggerFactory.getLogger(RenameAllFilesInDirectory.class);
-
+	private static FileProcessor fileProcessor = new FileProcessor();
+	
 	public static StringBuffer renameFilesInDirectory(MP3CleanerModel model) {
 
 		//		model.getPath(), model.getNewFileName(),
 		//		model.getExetentions(), model.getStartCount()
-
+		ArrayList<File> filesList = fileProcessor.readFileDirtorySorted(model.getPath(), "asc");
+		
 		StringBuffer log_buffer = new StringBuffer("");
-		File directory = new File(model.getPath());
+		//File directory = new File(model.getPath());
 		String sourceFile = "";
 		int istartSeq = Integer.valueOf(model.getStartCount());
 		int icount = 1;
@@ -26,8 +28,10 @@ public class RenameAllFilesInDirectory {
 		if (-1 < istartSeq) {
 			icount = istartSeq;
 		}
-		for (File file : directory.listFiles()) {
+		for (File file : filesList) {
+		//for (File file : directory.listFiles()) {
 			if (file.isDirectory()) {
+				//Reserved
 			} else {
 				try {
 					sourceFile = file.getPath();

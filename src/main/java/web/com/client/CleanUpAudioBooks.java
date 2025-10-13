@@ -2,6 +2,7 @@ package web.com.client;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -22,26 +23,31 @@ public class CleanUpAudioBooks {
 	 * @param args
 	 */
 
+	private static FileProcessor fileProcessor = new FileProcessor();
+
 	public static StringBuffer cleanupAudioEx(MP3CleanerModel model) {
 
 		StringBuffer buffer = new StringBuffer("");
 		if (!model.getPath().endsWith("\\")) {
-			//model.setPath(model.getPath().concat("\\"));
+			// model.setPath(model.getPath().concat("\\"));
 		}
-		int icount = Integer.valueOf(model.getStartCount());
-		File directory = new File(model.getPath());
-		boolean isAnnotation = false;
-		if (!directory.exists()) {
-			buffer.append("Diroctory does not exist: ".concat(directory.toString()));
+		ArrayList<File> filesList = fileProcessor.readFileDirtorySorted(model.getPath(), "asc");
+		if (1 > filesList.size()) {
+			buffer.append("Diroctory does not exist: ".concat(model.getPath()));
 			logger.error(buffer.toString());
 			return buffer;
 		}
+		int icount = Integer.valueOf(model.getStartCount());
+		boolean isAnnotation = false;
+
 		if (icount < 1) {
 			icount = 1; // trackId not allowed 0
 		}
-		for (File file : directory.listFiles()) {
-			// if this is a sub-directory, then go examine .mp3 files in it
+
+		for (File file : filesList) {
+
 			if (file.isDirectory()) {
+				// reserved
 			} else if (file.getName().endsWith(".mp3")) {
 
 				MP3 mp3 = null;
@@ -101,8 +107,8 @@ public class CleanUpAudioBooks {
 		return buffer;
 	}
 
-	public static StringBuffer cleanupAudioEx(String dirPath, String authorName, String albumName, String year, String comments, String leadPerformer, String titleName,
-			String imageName, String startTrack) {
+	public static StringBuffer cleanupAudioEx(String dirPath, String authorName, String albumName, String year,
+			String comments, String leadPerformer, String titleName, String imageName, String startTrack) {
 
 		StringBuffer buffer = new StringBuffer("");
 		if (!dirPath.endsWith("\\")) {

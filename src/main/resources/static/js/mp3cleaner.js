@@ -20,6 +20,25 @@ function getAjaxData(serviceid, controlid, dockid, event) {  // getAjaxData('/ap
 	// url = http://localhost:8082/mp3cleaner/api/data_get?dirPath=C:/Data/Music_Books/OZ_History/audio/
 }
 
+//--
+	function getContextUrl() {
+		var location = window.location.href;
+		var contextUrl = location.substring(0, location.lastIndexOf("/"));
+		return contextUrl;
+	}
+	function parseSourcePath(controlid) {
+
+		var data = document.getElementById(controlid).value.toString();
+		var data_split = data.split("\\"); // replace backslash to forward slash in path
+		var data_join = data_split.join("/"); // replace backslash to forward slash in path
+		var lastChar = data_join.charAt(data_join.length - 1).toString();
+		if ("/" != lastChar) { // if last char is not slash, add trailing slash to the  path
+			data_join = data_join.concat("/");
+		}
+		document.getElementById(controlid).value = data_join.toString();
+		return data_join;
+	}
+//--
 
 function ajaxGet(url, dockid, event) { // call returns directory files lising ajaxGet(url, 'fileslist')
 
@@ -30,7 +49,28 @@ function ajaxGet(url, dockid, event) { // call returns directory files lising aj
 	xhr.open('GET', url, true);
 	xhr.send();
 }
-function ajaxStatusChange(dockid, event) {
+
+function ajaxFormPost(url, formid, dockid, event) {
+
+	xhr.onreadystatechange = function() {
+		ajaxStatusChange(dockid, event);
+	}
+	var form = document.getElementById(formid);
+	var formData = new FormData(form);
+	xhr.open("POST", url, true);
+	xhr.send(formData);
+}
+
+function ajaxJSonPost(url, jsondata, dockid, event) {
+
+	xhr.onreadystatechange = function() {
+		ajaxStatusChange(dockid, event);
+	}
+	xhr.open("POST", url, true);
+	xhr.send(jsondata);
+}
+
+function ajaxStatusChange(dockid, nextevent) {
 
 	if (xhr.readyState === 4 && xhr.status === 200) {
 		if ("text" === document.getElementById(dockid).type) { //input type="text"
@@ -38,8 +78,8 @@ function ajaxStatusChange(dockid, event) {
 		} else {
 			document.getElementById(dockid).innerHTML = xhr.responseText;
 		}
-		if (null !== event) {
-			setTimeout(event, 500);
+		if (null !== nextevent) {
+			setTimeout(nextevent, 500);
 		}
 
 	} else if (xhr.readyState === 4 && xhr.status !== 200) {
@@ -59,11 +99,10 @@ function toDashboard(formid) {
 	}
 }
 
-function showObject(id) {
+function showObject(id, action) {
 	var object = document.getElementById(id);
 	if (null !== object) {
-		var show = object.style.display;
-		if ("none" === show) {
+		if (true === action) {
 			object.style.display = "";
 		} else {
 			object.style.display = "none";
@@ -72,7 +111,6 @@ function showObject(id) {
 		alert("undefined object id: " + id);
 	}
 }
-
 
 function clearInputs(inList) { // example: list of input id, const inputsList = [ "bookName", "title", "author", "reader", "year" ];
 	var icount = inList.length;
@@ -150,6 +188,19 @@ function cleartorage(prefix, inList) {
 	}
 }
 
+function startTimer(dockid, action) {
+	if (true == action) {
+		const element = document.getElementById(dockid);
+		if (null !== element) {
+			element.innerHTML = "0";
+			myInterval = setInterval(function() {
+				element.innerHTML = (parseFloat(element.innerHTML) + 0.1).toFixed(1); // format 6.8 in sec
+			}, 100);
+		}
+	} else {
+		clearInterval(myInterval);
+	}
+}
 //---
 
 var sortdir = true;
@@ -171,8 +222,8 @@ function sortTable(tableName, columnId) {
 			if (null == currentRow) {
 				continue;
 			}
-			var celval = currentRow.innerHTML.toLowerCase().replaceAll(":","").replaceAll(",",""); //exclude time and kb formats
-			var celnextval = nextRow.innerHTML.toLowerCase().replaceAll(":","").replaceAll(",","");
+			var celval = currentRow.innerHTML.toLowerCase().replaceAll(":", "").replaceAll(",", ""); //exclude time and kb formats
+			var celnextval = nextRow.innerHTML.toLowerCase().replaceAll(":", "").replaceAll(",", "");
 			if (false == sortdir) { //sort acs
 				if (!isNaN(parseInt(celval)) && !isNaN(parseInt(celnextval))) {
 					if (parseInt(celval, 10) > parseInt(celnextval, 10)) {

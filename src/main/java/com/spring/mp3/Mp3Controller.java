@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -45,7 +47,7 @@ public class Mp3Controller {
 	private void setSessionAttributs(HttpSession session) {
 
 		if (null == session.getAttribute("mp3Context")) {
-			session.setAttribute("mp3Context", mp3Context); //read in JSP as ${sessionScope.mp3Context}
+			session.setAttribute("mp3Context", mp3Context); // read in JSP as ${sessionScope.mp3Context}
 		}
 		if (null == session.getAttribute("myPort")) {
 			session.setAttribute("myPort", myPort);
@@ -61,7 +63,8 @@ public class Mp3Controller {
 	}
 
 	@GetMapping("/show_format")
-	public String getFormat(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @ModelAttribute("mp3Options") MP3CleanerOptions mp3Options) {
+	public String getFormat(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@ModelAttribute("mp3Options") MP3CleanerOptions mp3Options) {
 
 		this.setSessionAttributs(session);
 		session.setAttribute("mp3Options", mp3Options);
@@ -69,7 +72,8 @@ public class Mp3Controller {
 	}
 
 	@PostMapping("/do_format")
-	public String formatFiles(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @RequestParam(required = false) String filetype) {
+	public String formatFiles(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@RequestParam(required = false) String filetype) {
 
 		this.setSessionAttributs(session);
 		if (null == session.getAttribute("mp3Options")) {
@@ -85,8 +89,50 @@ public class Mp3Controller {
 		return "formatfiles";
 	}
 
+	@PostMapping("/do_ajax_format") // Ajax use web-form submit
+	public String postAjaxFormat(HttpSession session, Model model,
+			@ModelAttribute("mp3Model") MP3CleanerModel mp3Model) {
+
+		this.setSessionAttributs(session);
+		if (null == session.getAttribute("mp3Options")) {
+			return "index";
+		}
+		MP3Processor mp3Processor = new MP3Processor();
+		try {
+			mp3Processor.formatMP3Directory(mp3Model);
+			MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
+			StringBuffer retval = this.getAjaxDirectoryList(mp3Options, mp3Model.getPath(), mp3Model.getFiletype());
+			mp3Model.setResultBuffer(retval);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return "fileslist";
+	}
+
+	@PostMapping("/do_json_format") // ajax use Json body request
+	public String postAjaxFormat(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@RequestBody String postData) {
+		this.setSessionAttributs(session);
+		if (null == session.getAttribute("mp3Options")) {
+			return "index";
+		}
+		MP3Processor mp3Processor = new MP3Processor();
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			MP3CleanerModel mp3Model02 = objectMapper.readValue(postData, MP3CleanerModel.class);
+			mp3Processor.formatMP3Directory(mp3Model02);
+			MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
+			StringBuffer retval = this.getAjaxDirectoryList(mp3Options, mp3Model02.getPath(), mp3Model02.getFiletype());
+			mp3Model.setResultBuffer(retval);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return "fileslist";
+	}
+
 	@PostMapping("/do_cleanup")
-	public String clearUpMp3(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @RequestParam(required = false) String filetype) {
+	public String clearUpMp3(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@RequestParam(required = false) String filetype) {
 
 		this.setSessionAttributs(session);
 		if (null == session.getAttribute("mp3Options")) {
@@ -102,7 +148,9 @@ public class Mp3Controller {
 			updateFields.put("ALBUM_ARTIST", "");
 			updateFields.put("YEAR", "0");
 			updateFields.put("TRACK", "0");
-			audioTag3Processor.cleanAttributesMP3Directory(mp3Model.getPath(), updateFields); //AudioFile audioFile, HashMap<String, String> updateFields
+			audioTag3Processor.cleanAttributesMP3Directory(mp3Model.getPath(), updateFields); // AudioFile audioFile,
+																								// HashMap<String,
+																								// String> updateFields
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -111,7 +159,8 @@ public class Mp3Controller {
 	}
 
 	@GetMapping("/show_rename")
-	public String getRename(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @ModelAttribute("mp3Options") MP3CleanerOptions mp3Options) {
+	public String getRename(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@ModelAttribute("mp3Options") MP3CleanerOptions mp3Options) {
 		this.setSessionAttributs(session);
 		session.setAttribute("mp3Options", mp3Options);
 		this.parseFileTypeDropDown(mp3Model);
@@ -120,21 +169,31 @@ public class Mp3Controller {
 	}
 
 	@PostMapping("/do_rename")
-	public String renameFiles(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @RequestParam(required = false) String filetype) {
+	public String renameFiles(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			@RequestParam(required = false) String filetype) {
 		this.setSessionAttributs(session);
 		this.parseFileTypeDropDown(mp3Model);
 		MP3Processor mp3Processor = new MP3Processor();
 		try {
 			mp3Processor.renameMP3Directory(mp3Model);
+			//MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
+			MP3CleanerOptions mp3Options = new MP3CleanerOptions();
+			mp3Options.setSizeOption("on");
+			mp3Options.setModifiedOption("on");
+			StringBuffer retval = this.getAjaxDirectoryList(mp3Options, mp3Model.getPath(), mp3Model.getFiletype());
+			mp3Model.setResultBuffer(retval);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return "renamefiles";
+		// return "renamefiles";
+		return "fileslist";
 	}
 
 	@GetMapping("/api/data_get") // loads files list view as StringBuffer retval
-	public String getAjaxData(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, String dirPath,
-			@RequestParam(required = false) String filetype, @RequestParam(required = false) String callerid) {
+	public String getAjaxData(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model,
+			String dirPath, @RequestParam(required = false) String filetype,
+			@RequestParam(required = false) String callerid) {
 
 		StringBuffer retval = new StringBuffer("");
 		this.setSessionAttributs(session);
@@ -159,7 +218,8 @@ public class Mp3Controller {
 	}
 
 	@GetMapping("/api/data_attr") // loads the attirbuts of the first MP3 file in current directory
-	public String getAjaxAttributes(HttpSession session, Model model, @ModelAttribute("mp3Model") MP3CleanerModel mp3Model, String dirPath) {
+	public String getAjaxAttributes(HttpSession session, Model model,
+			@ModelAttribute("mp3Model") MP3CleanerModel mp3Model, String dirPath) {
 
 		try {
 			ArrayList<String> attirbutesList = audioTagProcessor.getAttribuesValue(dirPath);
@@ -219,7 +279,8 @@ public class Mp3Controller {
 
 	private ArrayList<String> getFieldsHeaders(MP3CleanerOptions mp3Options) {
 		// set columns order here
-		// to change column header set string like these samples "TRACK=TRACK_ID", "ALBUM=Album Name" or "ALBUM_ARTIST=Narrator"
+		// to change column header set string like these samples "TRACK=TRACK_ID",
+		// "ALBUM=Album Name" or "ALBUM_ARTIST=Narrator"
 		ArrayList<String> fieldsList = new ArrayList<String>();
 		fieldsList.add("#=#");
 		fieldsList.add("NAME=NAME");
@@ -257,11 +318,11 @@ public class Mp3Controller {
 		return fieldsList;
 	}
 
-	//	private void setAppProperties(Model model) {
-	//		model.addAttribute("mp3Context", mp3Context);
-	//		model.addAttribute("myPort", myPort);
-	//	}
-	//	
+	// private void setAppProperties(Model model) {
+	// model.addAttribute("mp3Context", mp3Context);
+	// model.addAttribute("myPort", myPort);
+	// }
+	//
 	// -------- Error handling
 	public class MyErrorController implements ErrorController {
 

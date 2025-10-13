@@ -15,13 +15,14 @@ public class MP3CleanerModel {
 	private String year = "1970";
 	private String imageName = "";
 	private String appContext = "";
-	private String filetype = "";
+	private String filetype = ".mp3";
 	private String dropDownTypes = "";
-	
+	private String executionTime = "0";
 	private ArrayList<String> attributesList = new ArrayList<String>();
 
 	private ArrayList<String> extensions = new ArrayList<String>();
 	private StringBuffer resultBuffer = new StringBuffer("");
+	
 
 	public MP3CleanerModel() {
 		extensions.add("all");
@@ -37,7 +38,31 @@ public class MP3CleanerModel {
 		extensions.add(".xls");
 		extensions.add(".xml");
 	}
+	
+	public MP3CleanerModel(String path, String bookName, String title, String author, String reader, String imageName) {
 
+		this.path = path;
+		this.bookName = bookName;
+		this.title = title;
+		this.author = author;
+		this.reader = reader;
+		this.imageName = imageName;
+//
+//		extensions.add("all");
+//		extensions.add(".mp3");
+//		extensions.add(".mp4");
+//		extensions.add(".jpg");
+//		extensions.add(".png");
+//		extensions.add(".wav");
+//		extensions.add(".avi");
+//		extensions.add(".mov");
+//		extensions.add(".pdf");
+//		extensions.add(".docx");
+//		extensions.add(".xls");
+//		extensions.add(".xml");
+	}
+
+	
 	public String getPath() {
 		return path;
 	}
@@ -164,6 +189,14 @@ public class MP3CleanerModel {
 
 	public void setDropDownTypes(String dropDownTypes) {
 		this.dropDownTypes = dropDownTypes;
+	}
+
+	public String getExecutionTime() {
+		return executionTime;
+	}
+
+	public void setExecutionTime(String executionTime) {
+		this.executionTime = executionTime;
 	}
 
 }

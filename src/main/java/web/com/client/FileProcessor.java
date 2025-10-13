@@ -468,7 +468,7 @@ public final class FileProcessor {
 		return filesNames;
 	}
 
-	private static ArrayList<File> sortFiles(ArrayList<File> arrayFiles, String sortOrder) {
+	public static ArrayList<File> sortFiles(ArrayList<File> arrayFiles, String sortOrder) {
 
 		ArrayList<File> arFolders = new ArrayList<File>(1);
 		ArrayList<File> arFiles = new ArrayList<File>(1);
@@ -702,6 +702,27 @@ public final class FileProcessor {
 		return retval;
 	}
 
+	public ArrayList<File> readFileDirtorySorted(String dirToRead, String sorted) {
+
+		File fileDir = new File(dirToRead);
+		ArrayList<File> dirList = new ArrayList<File>(0);
+		if (!fileDir.exists()) {
+			logger.error("directory does not exist! - ".concat(dirToRead));
+			return dirList;
+		}
+		File[] filesList = fileDir.listFiles();
+
+		for (int i = 0; i < filesList.length; i++) {
+			if (filesList[i].isDirectory()) {
+				// --
+			} else if (filesList[i].isFile()) {
+				dirList.add(filesList[i]);
+			}
+		}
+		dirList = sortFiles(dirList, sorted); // desc, asc
+		return dirList;
+	}
+	
 	public static String unixTimeToDate(long unixTime, String format) {
 
 		String datetimeString = "";
