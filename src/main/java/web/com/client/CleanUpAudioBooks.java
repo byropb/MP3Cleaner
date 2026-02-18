@@ -62,6 +62,9 @@ public class CleanUpAudioBooks {
 					if (title.toLowerCase().contains("prologue") || title.toLowerCase().contains("пролог")) {
 						isAnnotation = true;
 					}
+					if (title.toLowerCase().contains("epilogue") || title.toLowerCase().contains("эпилог")) {
+						isAnnotation = true;
+					}
 					if (title.toLowerCase().contains("annotation") || title.toLowerCase().contains("аннотация")) {
 						isAnnotation = true;
 					}

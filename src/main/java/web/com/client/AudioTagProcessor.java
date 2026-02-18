@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 public class AudioTagProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(AudioTagProcessor.class);
+	private String mp3Context = "";
 
 	// function used by Ajax call @GetMapping("/api/data_attr")
 	public ArrayList<String> getAttribuesValue(String dirToRead) throws Exception {
@@ -23,7 +24,7 @@ public class AudioTagProcessor {
 		File fileDir = new File(dirToRead);
 		if (!fileDir.exists()) {
 			logger.error("directory does not exist! - ".concat(dirToRead));
-			//return retval;
+			// return retval;
 		}
 		File[] filesList = fileDir.listFiles();
 		String audioTagData = "";
@@ -52,7 +53,7 @@ public class AudioTagProcessor {
 							year = year.substring(0, 4);
 						}
 						retval.add("\"year=".concat(year).concat("\""));
-						break; //read only single file's attributes
+						break; // read only single file's attributes
 					}
 				}
 
@@ -61,24 +62,26 @@ public class AudioTagProcessor {
 		return retval;
 	}
 
-	public StringBuffer listMP3Dirtory(ArrayList<HashMap<String, String>> directory, ArrayList<String> fieldsList, String filetype) throws Exception {
+	public StringBuffer listMP3Dirtory(ArrayList<HashMap<String, String>> directory, ArrayList<String> fieldsList,
+			String mp3Context, String filetype) throws Exception {
 
 		StringBuffer buffer = new StringBuffer("<table class='data_table' id='data_table' >\n");
 		if (directory.isEmpty()) {
 			buffer.append("<tr><td class='req'>Directory does not exist!</td></tr></table>");
 			return buffer;
 		}
-
+		this.mp3Context = mp3Context;
 		int icount = directory.size();
 		int ifiles = 0;
 		int ifieldsCount = fieldsList.size();
 		HashMap<String, String> map = directory.get(0);
-		//sortTable
+		// sortTable
 		buffer.append("<tr>");
 
 		for (int n = 0; n < ifieldsCount; n++) {
 			String[] header = fieldsList.get(n).split("=");
-			buffer.append("<th class='data_header' ").append(this.parseSortClick("data_table", header[1], n)).append(" >").append(header[1]).append("</th>");
+			buffer.append("<th class='data_header' ").append(this.parseSortClick("data_table", header[1], n))
+					.append(" >").append(header[1]).append("</th>");
 
 		}
 		buffer.append("</tr>\n");
@@ -93,15 +96,18 @@ public class AudioTagProcessor {
 				if (-1 < lastIndex) {
 					String extention = fileName.substring(lastIndex);
 					if (filetype.equalsIgnoreCase(extention) || "all".equalsIgnoreCase(filetype)) {
-						buffer.append("<tr class='data_row'>\n");
 						ifiles++;
+						buffer.append("<tr class='data_row' title='click to play'  onclick='get_download(\"");
+						buffer.append(map.get("name")).append("\");' ");
+						buffer.append(">\n");
+
 						if (".mp3".equalsIgnoreCase(extention)) {
-							//mp3 file's attributes
+							// mp3 file's attributes
 							buffer.append(this.getMP3data(file, ifiles, fieldsList));
 
 						} else {
 
-							//standard file's attribute.
+							// standard file's attribute.
 							for (int n = 0; n < ifieldsCount; n++) {
 
 								String[] header = fieldsList.get(n).split("=");
@@ -113,17 +119,19 @@ public class AudioTagProcessor {
 									buffer.append(this.parsHTMLData(fileName));
 									break;
 								case "FILE_SIZE":
-									String fileLength = String.valueOf(String.format("%,d", file.length() / 1024)).concat(" KB");
+									String fileLength = String.valueOf(String.format("%,d", file.length() / 1024))
+											.concat(" KB");
 									buffer.append(this.parsHTMLData(fileLength));
 									break;
 								case "LAST_MODIFIED":
-									String lastModified = String.valueOf(FileProcessor.unixTimeToDate(file.lastModified(), "yyyy-MM-dd HH:mm"));
+									String lastModified = String.valueOf(
+											FileProcessor.unixTimeToDate(file.lastModified(), "yyyy-MM-dd HH:mm"));
 									buffer.append(this.parsHTMLData(lastModified));
 									break;
-								case "AUDIO_LENGTH": //reserved
+								case "AUDIO_LENGTH": // reserved
 									buffer.append(this.parsHTMLData(""));
 									break;
-								case "YEAR": //reserved
+								case "YEAR": // reserved
 									buffer.append(this.parsHTMLData(""));
 									break;
 
@@ -134,13 +142,14 @@ public class AudioTagProcessor {
 						}
 						buffer.append("</tr>\n");
 					}
-				} ///---continue
+				} /// ---continue
 			} catch (Exception e) {
 				logger.error(e.toString());
 			}
 		}
 		if (1 > ifiles) {
-			buffer.append("<tr><td class='req' colspan='4'>No <b>").append(this.nullToBlank(filetype).toUpperCase()).append("</b> files found in current directory!</td>");
+			buffer.append("<tr><td class='req' colspan='4'>No <b>").append(this.nullToBlank(filetype).toUpperCase())
+					.append("</b> files found in current directory!</td>");
 			buffer.append("</tr>\n");
 		}
 		buffer.append("</table>\n");
@@ -177,7 +186,7 @@ public class AudioTagProcessor {
 				switch (header[0]) {
 				case "#":
 					buffer.append(this.parsHTMLData(String.valueOf(icount)));
-					//--
+					// --
 					break;
 				case "TRACK":
 					String audioTrackId = (audioTag.getFirst(FieldKey.valueOf(header[0])));
@@ -186,6 +195,7 @@ public class AudioTagProcessor {
 					break;
 				case "NAME":
 					buffer.append(this.parsHTMLData(file.getName()));
+					// buffer.append(this.parsLinkData(file.getName()));
 					break;
 				case "FILE_SIZE":
 					String fileLength = String.valueOf(String.format("%,d", file.length() / 1024)).concat(" KB");
@@ -193,7 +203,8 @@ public class AudioTagProcessor {
 					break;
 
 				case "LAST_MODIFIED":
-					String lastModified = String.valueOf(FileProcessor.unixTimeToDate(file.lastModified(), "yyyy-MM-dd HH:mm"));
+					String lastModified = String
+							.valueOf(FileProcessor.unixTimeToDate(file.lastModified(), "yyyy-MM-dd HH:mm"));
 					buffer.append(this.parsHTMLData(lastModified));
 					break;
 				case "AUDIO_LENGTH":
@@ -234,9 +245,24 @@ public class AudioTagProcessor {
 		return buffer.toString();
 	}
 
+	public String parsLinkData(String data) {
+// use to create <a href=> for click to download
+		StringBuffer buffer = new StringBuffer("");
+		buffer.append("<td class=''>");
+		buffer.append("<a href='").append(this.mp3Context);
+		buffer.append("/download/");
+		buffer.append(this.nullToBlank(data));
+		buffer.append("' >");
+		buffer.append(this.nullToBlank(data));
+		buffer.append("</a>");
+		buffer.append("</td>");
+
+		return buffer.toString();
+	}
+
 	private String parseSortClick(String tableName, String columnName, int columnId) {
 
-		StringBuffer buffer = new StringBuffer(""); //tableName, columnId
+		StringBuffer buffer = new StringBuffer(""); // tableName, columnId
 		buffer.append(" title ='sort by ").append(columnName).append("' ");
 		buffer.append("onclick =\"sortTable('").append(tableName).append("',").append(columnId).append("); \" ");
 
@@ -244,16 +270,17 @@ public class AudioTagProcessor {
 
 	}
 
-	public ArrayList<String> cleanAttributesMP3Directory(String dirToRead, HashMap<String, String> updateFields) throws Exception {
+	public ArrayList<String> cleanAttributesMP3Directory(String dirToRead, HashMap<String, String> updateFields)
+			throws Exception {
 
 		ArrayList<String> retval = new ArrayList<String>();
 		File fileDir = new File(dirToRead);
 		if (!fileDir.exists()) {
 			logger.error("directory does not exist! - ".concat(dirToRead));
-			//return retval;
+			// return retval;
 		}
 		File[] filesList = fileDir.listFiles();
-		//String audioTagData = "";
+		// String audioTagData = "";
 		for (int i = 0; i < filesList.length; i++) {
 			if (!filesList[i].isDirectory()) {
 				File file = filesList[i];
@@ -284,7 +311,8 @@ public class AudioTagProcessor {
 		try {
 			do {
 				Object iter = iterator.next();
-				//audioTag.setField(FieldKey.valueOf(iter.toString()), updateFields.get(iter).toString());
+				// audioTag.setField(FieldKey.valueOf(iter.toString()),
+				// updateFields.get(iter).toString());
 				String fieldName = iter.toString();
 				if (audioTag.hasField(FieldKey.valueOf(fieldName))) {
 					audioTag.deleteField(FieldKey.valueOf(fieldName));

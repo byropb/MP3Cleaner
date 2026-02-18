@@ -4,15 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <title>MP3Cleaner Web</title>
-<link rel="stylesheet" type="text/css" href="..${sessionScope.mp3Context}/css/mp3style.css" />
-<link rel="stylesheet" type="text/css" href="..${sessionScope.mp3Context}/css/modal_msg.css" />
-<script type="text/javascript" src="..${sessionScope.mp3Context}/js/mp3cleaner.js"></script>
+
 <link rel="stylesheet" type="text/css" href="..${mp3Context}/css/mp3style.css" />
 <link rel="stylesheet" type="text/css" href="..${mp3Context}/css/modal_msg.css" />
 <script type="text/javascript" src="..${mp3Context}/js/mp3cleaner.js"></script>
 </head>
 <body onload="body_onload();">
  <jsp:include page="modal_msg.jsp"></jsp:include>
+ <jsp:include page="popup_dock.jsp"></jsp:include>
+
  <form id='mp3cleaner' name='mp3cleaner' target="_self" method='post' action="javascript:submitFormPost();"
   onsubmit="form_onsubmit();">
   <table class='tab_frame' style='min-width: 600px'>
@@ -29,15 +29,21 @@
        </td>
        <td colspan='2'><input type='text' id='path' name='path' required='required' class='localpath'
         style='width: 90%' title='full path to local mp3 directory' value='${mp3Model.path}'
-        onchange="path_onchange(); " placeholder='C:/<path to mp3 directory>' /></td>
+        onchange="path_onchange(); " placeholder='C:/<path to mp3 directory>' /> <img
+        src='..${mp3Context}/images/refresh01.jpg' style='width: 15px; vertical-align: middle; cursor: pointer'
+        onclick='path_onchange();' title='refresh directory view' /></td>
       </tr>
+
       <tr>
        <td class='label'>Album<span class='req'>*</span>:
        </td>
        <td><input type='text' id='bookName' required='required' name='bookName' placeholder='album or book name'
         title='album or book name' value='${mp3Model.bookName}' /> <img src='..${mp3Context}/images/refresh01.jpg'
-        style='width: 15px; vertical-align: middle; cursor: pointer' onclick='get_mp3attributes()'
-        title='get file attributes from the directory' /></td>
+        style='width: 15px; vertical-align: middle; cursor: pointer' onclick='get_mp3attributes();'
+        title='refresh attributes view' /></td>
+       <td rowspan='6'>
+        <div id='container' style='width: 300px; height: 80px; text-align: center; overflow-x: auto; overflow-y: auto'>&nbsp;</div>
+       </td>
       </tr>
       <tr>
        <td class='label'>Title<span class='req'>*</span>:
@@ -85,10 +91,7 @@
        <td style='text-align: center'>&nbsp;<input type='button' onclick='cleanup();' value='remove attributes'
         title='remove attributes for all mp3 files in directory' /></td>
        <td style='text-align: right'><input type='submit' value='set attributes' class='button'
-        title='set attributes for all mp3 files in current directory' /> <input type='button' value='Parse Json'
-        class='button' onclick="javascript:submitJsonPost();"
-        title='set attributes for all mp3 files in current directory' />
-      </tr>
+        title='set attributes for all mp3 files in current directory' /> 
      </table>
     </td>
    </tr>
@@ -112,10 +115,11 @@
  </form>
 </body>
 <script type="text/javascript">
+
 	// for read/write localStorage function
 	const inputPath = [ "path" ];
 	const inputsList = [ "bookName", "title", "author", "reader", "year", "executionTime" ];
-	var myInterval;
+	var myInterval = 0;
 
 	function body_onload() {
 		readStorage('mp3in_', inputPath);
@@ -123,13 +127,9 @@
 		ajaxDataGet('/api/data_get?filetype=.mp3&dirPath=', 'path', 'fileslist', get_mp3attributes);
 	}
 
-	function form_onsubmit() {
-		showObject('myModal', true);
-		startTimer("executionTime", true);
-	}
-
 	function path_onchange() {
 		clearInputs(inputsList);
+		resetSrc('container');
 		writeStorage('mp3in_', inputPath);
 		form_onsubmit();
 		ajaxDataGet('/api/data_get?filetype=.mp3&dirPath=', 'path', 'fileslist', get_mp3attributes);
@@ -159,7 +159,6 @@
 		}
 	}
 
-
 	function cancelModal() {
 		showObject('myModal', false);
 		startTimer("executionTime", false);
@@ -167,6 +166,7 @@
 
 	//---Form submit POST--//
 	function submitFormPost() {
+		this.resetMedia();
 		var url = getContextUrl().concat("/do_ajax_format");
 		ajaxFormPost(url, 'mp3cleaner', 'fileslist', cancelModal);
 	}
@@ -199,14 +199,63 @@
 		jsonData = jsonData.substring(0, jsonData.length - 1) + "}";
 		return jsonData;
 	}
+	
  
-
-	function ajaxDataGet(serviceid, controlid, dockid, event) {
-		var url = getContextUrl().concat(serviceid);
-		var data = parseSourcePath('path');
-		url = url.concat(data);
-		ajaxGet(url, dockid, event);
+	function get_download_bak(filename) {
+		
+		var mp3player = document.getElementById("mp3player");
+		var mp3name =  document.getElementById("mp3name");
+		var mp3url = getContextUrl().concat("/download/").concat(filename); 
+		if (null !== mp3player){
+			mp3name.innerHTML= filename;
+			mp3player.src = mp3url;
+			mp3player.volume = 0.5;
+			mp3player.play();
+		}
 	}
+	
+
+	function resetMedia() {
+		var filedock = document.getElementById("filedock");
+		if(null !== filedock){
+			filedock.pause();
+		}
+		resetSrc('container');
+	}
+
+  function get_download(filename) {
+  
+  	resetMedia();
+  	var container = document.getElementById("container");
+  	var fileurl = getContextUrl().concat("/download/").concat(filename);
+  	var filedock = document.createElement("audio");
+  	filedock.style.height = '50%';
+  	filedock.controls = true;
+  	filedock.autoplay = true;
+  	filedock.volume = 0.5;
+  	filedock.src = fileurl;
+  
+  	var span = document.createElement("span");
+  	span.innerHTML = filename;
+  	span.style.color = "green";
+  	container.appendChild(span);
+  	container.appendChild(filedock);
+  }
+  
+  function downloadFile_example() { // where the download  requires implementaiton in web-controller. see annotation @GetMapping("/download/{filename:.+}")
+      fetch("http://localhost:8082/mp3cleaner/download")
+          .then(response => response.blob())
+          .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "sample.pdf"; // optional override
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+          });
+  }
+ 
 </script>
 </html>
 

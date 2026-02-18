@@ -27,12 +27,14 @@ public class MP3CleanerModel {
 	public MP3CleanerModel() {
 		extensions.add("all");
 		extensions.add(".mp3");
-		extensions.add(".mp4");
+		extensions.add(".wav");
 		extensions.add(".jpg");
 		extensions.add(".png");
-		extensions.add(".wav");
+		extensions.add(".bmp");
+		extensions.add(".mp4");
 		extensions.add(".avi");
 		extensions.add(".mov");
+		extensions.add(".txt");
 		extensions.add(".pdf");
 		extensions.add(".docx");
 		extensions.add(".xls");

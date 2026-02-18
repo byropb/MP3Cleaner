@@ -1,4 +1,575 @@
-2025-10-13 08:49:28 [http-nio-8082-exec-6] ERROR web.com.client.FileProcessor, line: 679 - directory does not exist! - G:/Music_Books/EnglishReadings/Richard Morgan/Altered Carbon/split_02/
- 2025-10-13 08:49:29 [http-nio-8082-exec-5] ERROR web.com.client.AudioTagProcessor, line: 25 - directory does not exist! - G:/Music_Books/EnglishReadings/Richard Morgan/Altered Carbon/split_02/
- 2025-10-13 08:49:29 [http-nio-8082-exec-5] ERROR com.spring.mp3.Mp3Controller, line: 228 - Cannot read the array length because "filesList" is null
+2026-02-17 09:23:18 [http-nio-8082-exec-4] ERROR o.a.c.c.C.[.[.[/mp3cleaner].[jsp], line: 170 - Servlet.service() for servlet [jsp] threw exception
+ jakarta.el.ELException: Function [:getContextUrl] not found
+	at org.apache.el.parser.AstFunction.getValue(AstFunction.java:147)
+	at org.apache.el.ValueExpressionImpl.getValue(ValueExpressionImpl.java:152)
+	at org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate(PageContextImpl.java:674)
+	at org.apache.jsp.WEB_002dINF.jsp.renamefiles_jsp._jspService(renamefiles_jsp.java:280)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:64)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:436)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:308)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:394)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:323)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:268)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:171)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:314)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1437)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1168)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-17 09:23:18 [http-nio-8082-exec-4] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet], line: 170 - Servlet.service() for servlet [dispatcherServlet] in context with path [/mp3cleaner] threw exception [An exception occurred processing [/WEB-INF/jsp/renamefiles.jsp] at line [124]
+
+121:     ------------------------------ */
+122:     function submitFormPost() {
+123:         form_onsubmit();
+124:         const url = '${getContextUrl()}/do_rename';
+125:         ajaxFormPost(url, "mp3cleaner", "fileslist", cancelModal);
+126:     }
+127: 
+
+
+Stacktrace:] with root cause
+ jakarta.el.ELException: Function [:getContextUrl] not found
+	at org.apache.el.parser.AstFunction.getValue(AstFunction.java:147)
+	at org.apache.el.ValueExpressionImpl.getValue(ValueExpressionImpl.java:152)
+	at org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate(PageContextImpl.java:674)
+	at org.apache.jsp.WEB_002dINF.jsp.renamefiles_jsp._jspService(renamefiles_jsp.java:280)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:64)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:436)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:308)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:394)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:323)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:268)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:171)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:314)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1437)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1168)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-17 09:23:33 [http-nio-8082-exec-3] ERROR o.a.c.c.C.[.[.[/mp3cleaner].[jsp], line: 170 - Servlet.service() for servlet [jsp] threw exception
+ jakarta.el.ELException: Function [:getContextUrl] not found
+	at org.apache.el.parser.AstFunction.getValue(AstFunction.java:147)
+	at org.apache.el.ValueExpressionImpl.getValue(ValueExpressionImpl.java:152)
+	at org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate(PageContextImpl.java:674)
+	at org.apache.jsp.WEB_002dINF.jsp.renamefiles_jsp._jspService(renamefiles_jsp.java:280)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:64)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:436)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:308)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:394)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:323)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:268)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:171)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:314)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1437)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1168)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-17 09:23:33 [http-nio-8082-exec-3] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet], line: 170 - Servlet.service() for servlet [dispatcherServlet] in context with path [/mp3cleaner] threw exception [An exception occurred processing [/WEB-INF/jsp/renamefiles.jsp] at line [124]
+
+121:     ------------------------------ */
+122:     function submitFormPost() {
+123:         form_onsubmit();
+124:         const url = '${getContextUrl()}/do_rename';
+125:         ajaxFormPost(url, "mp3cleaner", "fileslist", cancelModal);
+126:     }
+127: 
+
+
+Stacktrace:] with root cause
+ jakarta.el.ELException: Function [:getContextUrl] not found
+	at org.apache.el.parser.AstFunction.getValue(AstFunction.java:147)
+	at org.apache.el.ValueExpressionImpl.getValue(ValueExpressionImpl.java:152)
+	at org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate(PageContextImpl.java:674)
+	at org.apache.jsp.WEB_002dINF.jsp.renamefiles_jsp._jspService(renamefiles_jsp.java:280)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:64)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:436)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:308)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:394)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:323)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:268)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:171)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:314)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1437)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1168)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-17 09:36:25 [http-nio-8082-exec-2] ERROR web.com.client.FileProcessor, line: 710 - directory does not exist! - 
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:41:14 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:52:31 [http-nio-8082-exec-2] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 09:59:54 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:00:58 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:02 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:13 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:01:26 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:44 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:03:55 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:04:04 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:23 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:40 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:45 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:57 [http-nio-8082-exec-4] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:05:59 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:05 [http-nio-8082-exec-10] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:09 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew2-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:28 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:06:32 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:17 [http-nio-8082-exec-7] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:09:21 [http-nio-8082-exec-8] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:18 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:39 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:42 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:10:44 [http-nio-8082-exec-3] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:46 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:46 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:46 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:46 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:47 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-1] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:11:59 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:12:12 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZ-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 10:19:08 [http-nio-8082-exec-9] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZStory-001.mp3
+ 2026-02-17 11:35:42 [http-nio-8082-exec-1] ERROR web.com.client.FileProcessor, line: 710 - directory does not exist! - C:/Data/Music_Books/OZ_History/audio/2/
+ 2026-02-17 11:35:51 [http-nio-8082-exec-2] ERROR web.com.client.FileProcessor, line: 710 - directory does not exist! - C:/Data/Music_Books/OZ_History/audio/2/
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:35:58 [http-nio-8082-exec-5] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
+ 2026-02-17 11:45:07 [http-nio-8082-exec-6] ERROR w.c.client.RenameAllFilesInDirectory, line: 59 - unable to overwrite file - C:\Data\Music_Books\OZ_History\audio\OZNew-001.mp3
  

@@ -12,15 +12,15 @@ public class RenameAllFilesInDirectory {
 
 	private static final Logger logger = LoggerFactory.getLogger(RenameAllFilesInDirectory.class);
 	private static FileProcessor fileProcessor = new FileProcessor();
-	
+
 	public static StringBuffer renameFilesInDirectory(MP3CleanerModel model) {
 
-		//		model.getPath(), model.getNewFileName(),
-		//		model.getExetentions(), model.getStartCount()
+		// model.getPath(), model.getNewFileName(),
+		// model.getExetentions(), model.getStartCount()
 		ArrayList<File> filesList = fileProcessor.readFileDirtorySorted(model.getPath(), "asc");
-		
+
 		StringBuffer log_buffer = new StringBuffer("");
-		//File directory = new File(model.getPath());
+		// File directory = new File(model.getPath());
 		String sourceFile = "";
 		int istartSeq = Integer.valueOf(model.getStartCount());
 		int icount = 1;
@@ -29,9 +29,9 @@ public class RenameAllFilesInDirectory {
 			icount = istartSeq;
 		}
 		for (File file : filesList) {
-		//for (File file : directory.listFiles()) {
+			// for (File file : directory.listFiles()) {
 			if (file.isDirectory()) {
-				//Reserved
+				// Reserved
 			} else {
 				try {
 					sourceFile = file.getPath();
@@ -42,11 +42,12 @@ public class RenameAllFilesInDirectory {
 
 						StringBuffer buffer = new StringBuffer("");
 						String sequesnceId = String.format("%03d", Integer.valueOf(icount));
-						
-						//buffer.append(sequesnceId).append("-").append(model.getNewFileName()).append(suffix);
+
+						// buffer.append(sequesnceId).append("-").append(model.getNewFileName()).append(suffix);
 						buffer.append(model.getNewFileName()).append("-").append(sequesnceId).append(suffix);
 
-						String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1).concat(buffer.toString());
+						String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1)
+								.concat(buffer.toString());
 						File tempFile = new File(destPath);
 						if (!tempFile.exists()) {
 							icount++; // used for files sequence
@@ -70,8 +71,8 @@ public class RenameAllFilesInDirectory {
 
 	public static StringBuffer renameFilesInDirectory_byIncludeList_getExetentions(MP3CleanerModel model) {
 
-		//		model.getPath(), model.getNewFileName(),
-		//		model.getExetentions(), model.getStartCount()
+		// model.getPath(), model.getNewFileName(),
+		// model.getExetentions(), model.getStartCount()
 
 		StringBuffer log_buffer = new StringBuffer("");
 		File directory = new File(model.getPath());
@@ -85,19 +86,23 @@ public class RenameAllFilesInDirectory {
 		}
 		for (File file : directory.listFiles()) {
 			if (file.isDirectory()) {
+				// skip directory
 			} else {
 				try {
 					sourceFile = file.getPath();
 					int iIndex = sourceFile.lastIndexOf(".");
 					String suffix = sourceFile.substring(iIndex);
 					for (int i = 0; i < ifiles; i++) {
-						if (model.getExtensions().get(i).equalsIgnoreCase(suffix)) {
+						if (model.getExtensions().get(i).equalsIgnoreCase(suffix)) { // model.getExtensions().get(i)
+																						// provides list of extension to
+																						// be processed.
 
 							StringBuffer buffer = new StringBuffer("");
 							String sequesnceId = String.format("%03d", Integer.valueOf(icount));
 							buffer.append(sequesnceId).append("-").append(model.getNewFileName()).append(suffix);
 
-							String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1).concat(buffer.toString());
+							String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1)
+									.concat(buffer.toString());
 							File tempFile = new File(destPath);
 							if (!tempFile.exists()) {
 								icount++; // used for files sequence
@@ -121,7 +126,8 @@ public class RenameAllFilesInDirectory {
 	}
 
 	// -- renames all files in Directory by sequence and given name
-	public static StringBuffer renameFilesInDirectory(String dirPath, String fileName, ArrayList<String> fileTypes, String startSequence) {
+	public static StringBuffer renameFilesInDirectory(String dirPath, String fileName, ArrayList<String> fileTypes,
+			String startSequence) {
 
 		StringBuffer log_buffer = new StringBuffer("");
 		File directory = new File(dirPath);
@@ -146,7 +152,8 @@ public class RenameAllFilesInDirectory {
 							String sequesnceId = String.format("%03d", Integer.valueOf(icount));
 							buffer.append(sequesnceId).append("-").append(fileName).append(suffix);
 
-							String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1).concat(buffer.toString());
+							String destPath = sourceFile.substring(0, sourceFile.lastIndexOf("\\") + 1)
+									.concat(buffer.toString());
 							File tempFile = new File(destPath);
 							if (!tempFile.exists()) {
 								icount++;

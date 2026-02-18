@@ -266,7 +266,8 @@ public final class FileProcessor {
 		return in;
 	}
 
-	public static File writeFileStream(String uri, String streamBody, boolean create, boolean append) throws IOException {
+	public static File writeFileStream(String uri, String streamBody, boolean create, boolean append)
+			throws IOException {
 
 		writeTextToFile(uri, streamBody, create, append);
 		// InputStream in = new FileInputStream(uri);
@@ -521,6 +522,36 @@ public final class FileProcessor {
 		return arrayFilesSorted;
 	}
 
+	// function support sorting with numeric format where 1 to 9 dont have 0 in front 
+	public static ArrayList<File> bubbleSort(ArrayList<File> arFiles) {
+		int n = arFiles.size();
+
+		File fileTemp = null;
+		int lastIndex = 0;
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+				String currentName = arFiles.get(j).getName();
+				String nextName = arFiles.get(j + 1).getName();
+				lastIndex = currentName.lastIndexOf(".");
+				currentName = currentName.substring(0, lastIndex);
+				lastIndex = nextName.lastIndexOf(".");
+				nextName = nextName.substring(0, lastIndex);
+
+				String currentId = currentName.replaceAll("[^0-9]", "");
+				String nextId = nextName.replaceAll("[^0-9]", "");
+				if (!"".equals(currentId) && !"".equals(nextId)) {
+					if (Integer.valueOf(currentId) > Integer.valueOf(nextId)) {
+						fileTemp = arFiles.get(j);
+						arFiles.set(j, arFiles.get(j + 1));
+						arFiles.set(j + 1, fileTemp);
+					}
+				}
+			}
+		}
+		return arFiles;
+
+	}
+
 	public static InputStream textToInputStream(String text) {
 		InputStream inputStream = null;
 		inputStream = new ByteArrayInputStream(text.getBytes());
@@ -688,7 +719,9 @@ public final class FileProcessor {
 				dirList.add(filesList[i]);
 			}
 		}
-		dirList = sortFiles(dirList, sorted); // desc, asc
+
+		// dirList = sortFiles(dirList, sorted); // desc, asc
+		dirList = bubbleSort(dirList);
 		int icount = dirList.size();
 
 		for (int i = 0; i < icount; i++) {
@@ -719,10 +752,12 @@ public final class FileProcessor {
 				dirList.add(filesList[i]);
 			}
 		}
-		dirList = sortFiles(dirList, sorted); // desc, asc
+		// dirList = sortFiles(dirList, sorted); // desc, asc
+		dirList = bubbleSort(dirList);
+
 		return dirList;
 	}
-	
+
 	public static String unixTimeToDate(long unixTime, String format) {
 
 		String datetimeString = "";
@@ -767,7 +802,8 @@ public final class FileProcessor {
 	private String parseMp3link(File file) {
 
 		StringBuffer buffer = new StringBuffer("");
-		buffer.append("<a href='file:\\\\").append(file.getPath()).append("' target='_blank'>").append(file.getName()).append("</a>");
+		buffer.append("<a href='file:\\\\").append(file.getPath()).append("' target='_blank'>").append(file.getName())
+				.append("</a>");
 		return buffer.toString();
 
 	}

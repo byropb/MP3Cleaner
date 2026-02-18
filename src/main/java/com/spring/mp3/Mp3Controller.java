@@ -1,5 +1,10 @@
 package com.spring.mp3;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,14 +12,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,9 +45,14 @@ public class Mp3Controller {
 	@Value("${server.port}")
 	private String myPort;
 
+	@Value("${server.servlet.resource-path}")
+	private String downloadPath;
+
 	private static final Logger logger = LoggerFactory.getLogger(Mp3Controller.class);
 	private FileProcessor fileProcessor = new FileProcessor();
 	private AudioTagProcessor audioTagProcessor = new AudioTagProcessor();
+
+	private Path fileStorageLocation = Paths.get("C:\\secure-uploads");
 
 	@GetMapping("/*") // start application mapping
 	public String getHome(HttpSession session, Model model) {
@@ -176,7 +193,8 @@ public class Mp3Controller {
 		MP3Processor mp3Processor = new MP3Processor();
 		try {
 			mp3Processor.renameMP3Directory(mp3Model);
-			//MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
+			// MP3CleanerOptions mp3Options = (MP3CleanerOptions)
+			// session.getAttribute("mp3Options");
 			MP3CleanerOptions mp3Options = new MP3CleanerOptions();
 			mp3Options.setSizeOption("on");
 			mp3Options.setModifiedOption("on");
@@ -212,6 +230,7 @@ public class Mp3Controller {
 		}
 		retval = this.getAjaxDirectoryList(mp3Options, dirPath, filetype);
 		mp3Model.setResultBuffer(retval);
+		downloadPath = dirPath;
 
 		return "fileslist";
 
@@ -238,9 +257,25 @@ public class Mp3Controller {
 		dirPath = dirPath.replace("\\\\", "\\");
 		MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
 		String retval = this.getAjaxDirectoryList(mp3Options, dirPath, filetype).toString();
-
 		return retval;
+	}
 
+	@GetMapping("/download/{filename:.+}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String filename) throws IOException {
+		fileStorageLocation = Paths.get(downloadPath);
+		Path filePath = this.fileStorageLocation.resolve(filename).normalize();
+		InputStreamResource resource = new InputStreamResource(new FileInputStream(filePath.toFile()));
+		String contentType = Files.probeContentType(filePath);
+		if (contentType == null) {
+			contentType = "application/octet-stream"; // Fallback if type not determined
+		}
+
+		HttpHeaders headers = new HttpHeaders(); // Set Content-Disposition header attachment or inline
+		headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filePath.toFile().getName() + "\"");
+		headers.setContentLength(filePath.toFile().length()); // Set Content-Length if known, for client progress
+																// indicators
+		return ResponseEntity.ok().headers(headers).contentLength(filePath.toFile().length())
+				.contentType(MediaType.parseMediaType(contentType)).body(resource);
 	}
 
 	private StringBuffer getAjaxDirectoryList(MP3CleanerOptions mp3Options, String dirPath, String filetype) {
@@ -248,7 +283,7 @@ public class Mp3Controller {
 		ArrayList<HashMap<String, String>> list = fileProcessor.readFileDirtory(dirPath, "asc");
 		StringBuffer buffer = new StringBuffer("");
 		try {
-			buffer = audioTagProcessor.listMP3Dirtory(list, this.getFieldsHeaders(mp3Options), filetype);
+			buffer = audioTagProcessor.listMP3Dirtory(list, this.getFieldsHeaders(mp3Options), mp3Context, filetype);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -263,11 +298,12 @@ public class Mp3Controller {
 		if ("".equals(mp3Model.getFiletype())) {
 			mp3Model.setFiletype(".mp3");
 		}
+		//mp3Model.setFiletype("all");
 		int icount = mp3Model.getExtensions().size();
 		for (int i = 0; i < icount; i++) {
 			String option = mp3Model.getExtensions().get(i);
 			if (mp3Model.getFiletype().equalsIgnoreCase(option)) {
-				selected = "selected='selected' ";
+				selected = " selected = 'selected' ";
 			}
 			retval.append("<option value='").append(option).append("' ");
 			retval.append(selected).append(">").append(option).append("</option>\n");
@@ -342,4 +378,33 @@ public class Mp3Controller {
 			return "/error";
 		}
 	}
+
+	/***********************************/
+	// @Value("${upload.path}")
+	private String path;
+
+	@PostMapping("/upload") // example of file Upload
+							// https://medium.com/@AlexanderObregon/how-to-handle-file-uploads-and-downloads-with-spring-boot-84638463fd6f
+	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+		try {
+			// Check if the file's content type is acceptable
+			if (!file.getContentType().equals("image/jpeg")) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("Invalid file type. Only JPEG files are allowed.");
+			}
+
+			// Check the file's size
+			if (file.getSize() > 1_000_000) { // 1 MB limit
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is too large. The size limit is 1 MB.");
+			}
+
+			// Save the file to the server
+			file.transferTo(new java.io.File(path + file.getOriginalFilename()));
+			return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Could not upload the file: " + e.getMessage());
+		}
+	}
+
 }
