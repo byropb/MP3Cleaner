@@ -255,7 +255,7 @@ public final class FileProcessor {
 		return in;
 	}
 
-	public static boolean deleteFile(String uri) throws FileNotFoundException {
+	public static boolean deleteFile(String uri) { // throws FileNotFoundException
 		File fileSrc = new File(uri);
 		return fileSrc.delete();
 	}
@@ -522,8 +522,9 @@ public final class FileProcessor {
 		return arrayFilesSorted;
 	}
 
-	// function support sorting with numeric format where 1 to 9 dont have 0 in front 
-	public static ArrayList<File> bubbleSort(ArrayList<File> arFiles) {
+	// function support sorting with numeric format where 1 to 9 dont have 0 in
+	// front
+	public static ArrayList<File> bubbleSort(ArrayList<File> arFiles) throws NumberFormatException {
 		int n = arFiles.size();
 
 		File fileTemp = null;
@@ -540,10 +541,14 @@ public final class FileProcessor {
 				String currentId = currentName.replaceAll("[^0-9]", "");
 				String nextId = nextName.replaceAll("[^0-9]", "");
 				if (!"".equals(currentId) && !"".equals(nextId)) {
-					if (Integer.valueOf(currentId) > Integer.valueOf(nextId)) {
-						fileTemp = arFiles.get(j);
-						arFiles.set(j, arFiles.get(j + 1));
-						arFiles.set(j + 1, fileTemp);
+					try {
+						if (Long.valueOf(currentId) > Long.valueOf(nextId)) {
+							fileTemp = arFiles.get(j);
+							arFiles.set(j, arFiles.get(j + 1));
+							arFiles.set(j + 1, fileTemp);
+						}
+					} catch (NumberFormatException e) {
+						logger.error(e.getMessage());
 					}
 				}
 			}
@@ -701,7 +706,8 @@ public final class FileProcessor {
 		}
 	}
 
-	public ArrayList<HashMap<String, String>> readFileDirtory(String dirToRead, String sorted) {
+	public ArrayList<HashMap<String, String>> readFileDirtory(String dirToRead, String sorted)
+			throws NumberFormatException {
 
 		ArrayList<HashMap<String, String>> retval = new ArrayList<HashMap<String, String>>();
 

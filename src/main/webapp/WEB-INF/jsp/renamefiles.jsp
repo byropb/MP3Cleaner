@@ -17,11 +17,11 @@
  <jsp:include page="popup_dock.jsp"></jsp:include>
 
  <form id='mp3cleaner' name='mp3cleaner' target="_self" method='post' action="javascript:submitFormPost();"
- onsubmit="form_onsubmit();" >
+  onsubmit="form_onsubmit();" enctype="multipart/form-data">
   <table class='tab_frame' style='min-width: 600px'>
    <tr>
     <td style='text-align: center;'>
-     <h3>Rename Files</h3> (change files name in current directory)
+     <h3>Manage Files</h3> (change files name in current directory)
     </td>
    </tr>
    <tr>
@@ -40,8 +40,7 @@
        <td><select name="filetype" id="filetype" required='required' style='width: 30%' onchange="path_onchange();">
          <option>${mp3Model.dropDownTypes}</option>
        </select></td>
-
-       <td rowspan='3' style='width: 70%'>
+       <td rowspan='3'>
         <div id='container' style='width: 300px; height: 80px; text-align: center; overflow-x: auto; overflow-y: auto'>&nbsp;</div>
 
        </td>
@@ -57,15 +56,27 @@
         title='Starting index of file sequence' value='${mp3Model.startCount}'
         placeholder='Starting index of file sequence' /></td>
       </tr>
-
       <tr>
-       <td><input type='button' value='to dashboard'
-        onclick="showObject('myModal', true); toDashboard('mp3cleaner');" class='button' title='go to dashboard' /></td>
+       <td colspan='3'>
+       
+        <table style='padding: 10px; width:100%'>
+         <tr>
+          <td><input type='button' value='to dashboard'
+           onclick="showObject('myModal', true); toDashboard('mp3cleaner');" class='button' title='go to dashboard' /></td>
 
-       <td style='text-align: center; width: 50%'>&nbsp;</td>
+          <td nowrap='nowrap' style='text-align:;'>
+          <input type='file' style='max-width: 230px'
+           onchange='fileSelected("uploadfile", "submitfile");' id='uploadfile' name='uploadfile' multiple="multiple"
+           accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*, audio/*, video/*" />
 
-       <td style='text-align: right'><input type='submit' title='rename all files in directory'
-        onclickT='submitFormPost()' value='rename files' class='button' /></td>
+           &nbsp; <input type='button' value='Upload' id='submitfile' onclick='do_upload()' style='display: none' class='button'/></td>
+
+          <td style='text-align: right'><input type='submit' title='rename all files in directory'
+           onclickT='submitFormPost()' value='rename all' class='button' /></td>
+         </tr>
+        </table>
+        
+       </td>
       </tr>
      </table>
     </td>
@@ -85,12 +96,15 @@
 
   </table>
  </form>
+ 
+
+ 
+ 
 </body>
 <script type="text/javascript">
-
-	const inputPath = [ "path" ];
+	const inputPath = [ "path","filetype" ];
 	var myInterval = 0;
-	
+
 	function body_onload() {
 		readStorage('mp3in_', inputPath);
 		var filetype = document.getElementById("filetype").value;
@@ -98,19 +112,19 @@
 		form_onsubmit();
 		ajaxDataGet(serviceId, 'path', 'fileslist', cancelModal);
 	}
- 
+
 	function path_onchange() {
 		var filetype = document.getElementById("filetype").value;
 		var serviceId = "/api/data_get?callerid=rename&filetype=".concat(filetype).concat("&dirPath=");
 		writeStorage('mp3in_', inputPath);
-		this.resetMedia();
+		resetMedia();
 		form_onsubmit();
 		ajaxDataGet(serviceId, 'path', 'fileslist', cancelModal);
 
 	}
 	//---Form submit POST--/
 	function submitFormPost() {
-		this.resetMedia();
+		resetMedia();
 		//form_onsubmit();
 		var url = getContextUrl().concat("/do_rename");
 		ajaxFormPost(url, 'mp3cleaner', 'fileslist', cancelModal);
@@ -121,89 +135,23 @@
 		startTimer("executionTime", false);
 	}
 
-	function resetMedia() {
-		
-		var filedock = document.getElementById("filedock");
-		if(null !== filedock){
-			filedock.pause();
+	//--- upload file
+
+	function fileSelected(fileid, submitid) {
+		var fileInput = document.getElementById(fileid);
+		if (fileInput.files.length === 0) {
+			document.getElementById(submitid).style.display = "none";
+		} else {
+			document.getElementById(submitid).style.display = "";
 		}
-		showObject('documentFrame', false); // located in popup_dock.jsp include
-		showObject('documentDock', false);
-		showObject('imageDock', false);
-		resetSrc('container');
-		resetSrc('documentDock');
-		resetSrc('imageDock');
-		var documentFrame = document.getElementById("documentFrame"); // located in popup_dock.jsp include
-		documentFrame.style.width = "300px";
-		documentFrame.style.height = "300px";
 	}
-
-	function get_download(filename) {
-
-		this.resetMedia();
-		var filetype = "";
-		var filedock = null;
-		var container = document.getElementById("container");
-		var fileurl = getContextUrl().concat("/download/").concat(filename);
-		var lastIndex = filename.lastIndexOf("."); //get extention
-		if (0 < lastIndex) {
-			filetype = filename.substring(lastIndex + 1).toLowerCase();
-		}
-
-		switch (filetype) {
-		case "mp3":
-		case "wav":
-			filedock = document.createElement("audio");
-			filedock.style.height = '50%';
-			filedock.controls = true;
-			filedock.autoplay = true;
-			filedock.volume = 0.5;
-			filedock.src = fileurl;
-
-			span = document.createElement("span");
-			span.innerHTML = filename;
-			span.style.color = "green";
-			container.appendChild(span);
-			container.appendChild(filedock);
-
-			break;
-
-		case "jpg":
-		case "png":
-		case "bmp":
-			showObject('documentFrame', true); //modal_msg.jsp
-			showObject('documentDock', false);
-			showObject('imageDock', true);
-			filedock = document.getElementById("imageDock");
-			filedock.src = fileurl;
-
-			break;
-		case "mp4":
-		case "avi":
-		case "mov":
-		case "pdf":
-		case "txt":
-			showObject('documentFrame', true); //modal_msg.jsp //document.getElementById("documentFrame") 
-			showObject('documentDock', true);
-			showObject('imageDock', false);
-			filedock = document.getElementById('documentDock');
-			filedock.src = fileurl;
-
-			break;
-		case "docx":
-		case "doc":
-		case "xlsx":
-			showObject('documentFrame', false); //modal_msg.jsp //document.getElementById("documentFrame") 
-			showObject('documentDock', false);
-			showObject('imageDock', false);
-			filedock = document.getElementById('documentDock');
-			filedock.src = fileurl;
-			break;
-
-		case "":
-			break;
-		default:
-		}
+	function do_upload(){
+		var url = getContextUrl().concat("/upload");
+		ajaxFormPost(url, 'mp3cleaner', 'actionconfirm', path_onchange);
+		showObject('actionmsg', true);
+		document.getElementById("uploadfile").value = "";
+		fileSelected("uploadfile", "submitfile");
+		//setTimeout("showObject('actionmsg', false)",3000);
 	}
 </script>
 

@@ -1,6 +1,6 @@
 
 //---
-const xhr = new XMLHttpRequest();
+var xhr = new XMLHttpRequest();
 
 function getAjaxData(serviceid, controlid, dockid, nextevent) {  // getAjaxData('/api/data_get?dirPath=', 'path',  'fileslist');
 
@@ -37,8 +37,8 @@ function getContextUrl() {
 function parseSourcePath(controlid) {
 
 	var data = document.getElementById(controlid).value.toString();
-	if (2 > data.length){
-		document.getElementById(controlid).value ="";
+	if (2 > data.length) {
+		document.getElementById(controlid).value = "";
 		return "";
 	}
 	var data_split = data.split("\\"); // replace backslash to forward slash in path
@@ -69,6 +69,7 @@ function ajaxFormPost(url, formid, dockid, nextevent) {
 	}
 	var form = document.getElementById(formid);
 	var formData = new FormData(form);
+
 	xhr.open("POST", url, true);
 	xhr.send(formData);
 }
@@ -93,10 +94,20 @@ function ajaxStatusChange(dockid, nextevent) { // when ajax status changed, fire
 		if (null !== nextevent) {
 			setTimeout(nextevent, 500);
 		}
-
 	} else if (xhr.readyState === 4 && xhr.status !== 200) {
-		// Request completed but with an error
-		console.error('Error:', xhr.status, xhr.statusText);
+		//console.error('Error:', xhr.status, xhr.statusText);
+		if (0 === xhr.status) {
+			var msg = "<span class='header'>The request rejected by the Server</span><br/> Possible reason: The file is too large or type is invalid!";
+			this.showServiceMsg('actionmsg', 'actionconfirm', msg);
+		}
+	}
+}
+
+function showServiceMsg(msgcontainer, msgform, msg) {
+	var form = document.getElementById(msgform);
+	if (null !== form) {
+		form.innerHTML = msg;
+		showObject(msgcontainer, true);
 	}
 }
 
@@ -118,9 +129,10 @@ function showObject(id, action) { // show/hide html object
 			object.style.display = "";
 		} else {
 			object.style.display = "none";
+			//object.innerHTML = "";
 		}
 	} else {
-		alert("undefined object id: " + id);
+		alert("undefined object: " + id);
 	}
 }
 
@@ -131,7 +143,7 @@ function resetSrc(id) { // set empty object's innerHTML property
 		object.src = null;
 		object.innerHTML = "";
 	} else {
-		alert("undefined object id: " + id);
+		alert("undefined object: " + id);
 	}
 }
 
@@ -141,7 +153,7 @@ function disableObject(id, action) {
 	if (null !== object) {
 		object.disabled = action;
 	} else {
-		alert("undefined object id: " + id);
+		alert("undefined object: " + id);
 	}
 }
 function clearInputs(inList) { // example: list of input id, const inputsList = [ "bookName", "title", "author", "reader", "year" ];
@@ -327,33 +339,33 @@ var cly = 0;
 
 function setDrag(e, id) {  //onmousedown=\"setDrag(event,'cpecustomer')\" onmouseup=\"resetDrag(event,'cpecustomer')\
 	try {
- 		xdiv = document.getElementById(id);
-		if(null === xdiv){return false;}
+		xdiv = document.getElementById(id);
+		if (null === xdiv) { return false; }
 		xdiv.addEventListener('mousemove', doDrag);
 		cly = e.clientY - parseInt(xdiv.style.top);
 		clx = e.clientX - parseInt(xdiv.style.left);
 		xdiv.style.cursor = "move";
 	} catch (error) {
-		 alert(error)
+		alert(error)
 	}
 }
 
 function resetDrag(e, id) {
-	try { 		
+	try {
 		xdiv = document.getElementById(id);
-		if(null === xdiv){return false;}
+		if (null === xdiv) { return false; }
 		xdiv.removeEventListener('mousemove', doDrag);
 		xdiv.style.cursor = "default";
 		xdiv = null;
 		isscrollable = false;
 	} catch (error) {
-		 alert(error)
+		alert(error)
 	}
 }
 
 function doDrag(e) {
-	if (xdiv === null) {return false;}
-	if (e === null) {return false;}
+	if (xdiv === null) { return false; }
+	if (e === null) { return false; }
 	try {
 		xdiv.style.top = (e.clientY - cly) + "px";
 		xdiv.style.left = (e.clientX - clx) + "px";
@@ -370,36 +382,36 @@ function doDrag(e) {
 // var clx = 0;
 // var cly = 0;
 
- function doResize(e) {
-	
-		if(null === xdiv){return false;}
-		if ((e.clientX - parseInt(xdiv.style.left)) >= 0) {
-			xdiv.style.width = (e.clientX - parseInt(xdiv.style.left)) + 5 + "px";
-		} 
-		if ((e.clientY - parseInt(xdiv.style.top)) >= 0) {
-			xdiv.style.height = (e.clientY - (parseInt(xdiv.style.top))) + 5 + "px";
-		}
-		return true;
-	}
+function doResize(e) {
 
-	function setResize(e, id) {
+	if (null === xdiv) { return false; }
+	if ((e.clientX - parseInt(xdiv.style.left)) >= 0) {
+		xdiv.style.width = (e.clientX - parseInt(xdiv.style.left)) + 5 + "px";
+	}
+	if ((e.clientY - parseInt(xdiv.style.top)) >= 0) {
+		xdiv.style.height = (e.clientY - (parseInt(xdiv.style.top))) + 5 + "px";
+	}
+	return true;
+}
 
-		document.addEventListener("mousemove", doResize);
-		document.addEventListener("mouseup", resetResize);
-		xdiv = document.getElementById(id);
-		
-		if(null === xdiv){return false;}
-		cly = e.clientY - parseInt(xdiv.style.top);
-		clx = e.clientX - parseInt(xdiv.style.left);
-	}
-	function resetResize(e, id) {
-		
-		document.removeEventListener("mousemove", doResize);
-		document.removeEventListener("mouseup", resetResize);
-		xdiv = document.getElementById(id);
-		if(null === xdiv){return false;}
-		xdiv.style.cursor = "default";
-		xdiv = null;
-	}
+function setResize(e, id) {
+
+	document.addEventListener("mousemove", doResize);
+	document.addEventListener("mouseup", resetResize);
+	xdiv = document.getElementById(id);
+
+	if (null === xdiv) { return false; }
+	cly = e.clientY - parseInt(xdiv.style.top);
+	clx = e.clientX - parseInt(xdiv.style.left);
+}
+function resetResize(e, id) {
+
+	document.removeEventListener("mousemove", doResize);
+	document.removeEventListener("mouseup", resetResize);
+	xdiv = document.getElementById(id);
+	if (null === xdiv) { return false; }
+	xdiv.style.cursor = "default";
+	xdiv = null;
+}
 
 //-------------------------

@@ -31,6 +31,7 @@
 	border-radius: 25px;
 	text-align: center;
 	width: 20%;
+	font-family: Verdana, sans-serif;
 }
 
 /* The Close Button */
@@ -45,4 +46,9 @@
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.header {
+	font-size: 12px;
+	font-weight: bold;
 }

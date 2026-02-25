@@ -4,9 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>MP3Cleaner Web</title>
-<link rel="stylesheet" type="text/css" href="..${sessionScope.mp3Context}/css/mp3style.css" />
-<link rel="stylesheet" type="text/css" href="..${sessionScope.mp3Context}/css/modal_msg.css" />
-<script type="text/javascript" src="..${sessionScope.mp3Context}/js/mp3cleaner.js"></script>
 
 <link rel="stylesheet" type="text/css" href="..${mp3Context}/css/mp3style.css" />
 <link rel="stylesheet" type="text/css" href="..${mp3Context}/css/modal_msg.css" />
@@ -65,7 +62,7 @@ label {
        <td><input type='radio' id='option' onclick="form_submit('show_format');" name='option' value='format' /></td>
       </tr>
       <tr>
-       <td class='label'>Rename files:</td>
+       <td class='label'>Manage files:</td>
        <td><input type='radio' id='option' onclick="form_submit('show_rename');" name='option' value='rename' /></td>
       </tr>
       <tr>
@@ -103,8 +100,9 @@ label {
              </label> <label for="year"> <input type="checkbox" name="yearOption" id="yearOption" />Year
              </label> <label for="length"> <input type="checkbox" name="lengthOption" id="lengthOption" />Length
              </label> <label for="size"> <input type="checkbox" name="sizeOption" id="sizeOption" />Size
-             </label> <label for="modified"> <input type="checkbox" name="modifiedOption" id="modifiedOption" />Last
-              Modified
+             </label> <label for="modified"> <input type="checkbox" name="modifiedOption" id="modifiedOption" />Last Modified
+             </label> <label for="edit"> <input type="checkbox" name="editOption" id="editOption" />Edit
+             </label> <label for="delete"> <input type="checkbox" name="deleteOption" id="deleteOption" />Delete
              </label>
             </div>
            </div>
@@ -137,7 +135,7 @@ label {
   
 			const fieldslist = [ "trackOption", "titleOption", "artistOption",
 					"albumOption", "readbyOption", "yearOption",
-					"lengthOption", "sizeOption", "modifiedOption" ];
+					"lengthOption", "sizeOption", "modifiedOption", "editOption", "deleteOption" ];
 
 			function selectAll() {
 				var checked = document.getElementById("selectall").checked;

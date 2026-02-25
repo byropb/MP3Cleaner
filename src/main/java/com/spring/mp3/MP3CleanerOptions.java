@@ -12,6 +12,9 @@ public class MP3CleanerOptions {
 	private String sizeOption = "";
 	private String modifiedOption = "";
 
+	private String editOption = "";
+	private String deleteOption = "";
+
 	public String getTrackOption() {
 		return trackOption;
 	}
@@ -82,6 +85,22 @@ public class MP3CleanerOptions {
 
 	public void setModifiedOption(String modifiedOption) {
 		this.modifiedOption = modifiedOption;
+	}
+
+	public String getEditOption() {
+		return editOption;
+	}
+
+	public void setEditOption(String editOption) {
+		this.editOption = editOption;
+	}
+
+	public String getDeleteOption() {
+		return deleteOption;
+	}
+
+	public void setDeleteOption(String deleteOption) {
+		this.deleteOption = deleteOption;
 	}
 
 }

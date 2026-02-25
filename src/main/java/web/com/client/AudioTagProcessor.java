@@ -97,9 +97,8 @@ public class AudioTagProcessor {
 					String extention = fileName.substring(lastIndex);
 					if (filetype.equalsIgnoreCase(extention) || "all".equalsIgnoreCase(filetype)) {
 						ifiles++;
-						buffer.append("<tr class='data_row' title='click to play'  onclick='get_download(\"");
-						buffer.append(map.get("name")).append("\");' ");
-						buffer.append(">\n");
+
+						buffer.append("<tr class='data_row'>\n");
 
 						if (".mp3".equalsIgnoreCase(extention)) {
 							// mp3 file's attributes
@@ -107,16 +106,16 @@ public class AudioTagProcessor {
 
 						} else {
 
-							// standard file's attribute.
 							for (int n = 0; n < ifieldsCount; n++) {
 
 								String[] header = fieldsList.get(n).split("=");
 								switch (header[0]) {
 								case "#":
-									buffer.append(this.parsHTMLData(String.valueOf(icount)));
+									buffer.append(this.parsHTMLData(String.valueOf(ifiles)));
 									break;
 								case "NAME":
-									buffer.append(this.parsHTMLData(fileName));
+									buffer.append(this.parseActionData(fileName, "get_download", fileName, "data_row",
+											"click to play"));
 									break;
 								case "FILE_SIZE":
 									String fileLength = String.valueOf(String.format("%,d", file.length() / 1024))
@@ -134,7 +133,14 @@ public class AudioTagProcessor {
 								case "YEAR": // reserved
 									buffer.append(this.parsHTMLData(""));
 									break;
-
+								case "EDIT":
+									buffer.append(this.parseActionData(fileName, "get_edit", "rename", "data_row",
+											"rename file: ".concat(fileName)));
+									break;
+								case "DELETE": 
+									buffer.append(this.parseActionData(fileName, "get_delete", "delete", "data_row",
+											"delete file: ".concat(fileName)));
+									break;
 								default:
 									buffer.append(this.parsHTMLData(""));
 								}
@@ -194,8 +200,9 @@ public class AudioTagProcessor {
 
 					break;
 				case "NAME":
-					buffer.append(this.parsHTMLData(file.getName()));
-					// buffer.append(this.parsLinkData(file.getName()));
+					buffer.append(this.parseActionData(file.getName(), "get_download", file.getName(), "data_row",
+							"click to play"));
+
 					break;
 				case "FILE_SIZE":
 					String fileLength = String.valueOf(String.format("%,d", file.length() / 1024)).concat(" KB");
@@ -220,7 +227,14 @@ public class AudioTagProcessor {
 					}
 					buffer.append(this.parsHTMLData(year));
 					break;
-
+				case "EDIT":
+					buffer.append(this.parseActionData(file.getName(), "get_edit", "rename", "data_row",
+							"rename file: ".concat(file.getName())));
+					break;
+				case "DELETE":
+					buffer.append(this.parseActionData(file.getName(), "get_delete", "delete", "data_row",
+							"delete file: ".concat(file.getName())));
+					break;
 				default:
 					if (null != audioTag) {
 						String audioTagData = (audioTag.getFirst(FieldKey.valueOf(header[0])));
@@ -245,7 +259,7 @@ public class AudioTagProcessor {
 		return buffer.toString();
 	}
 
-	public String parsLinkData(String data) {
+	public String parseLinkData(String data) {
 // use to create <a href=> for click to download
 		StringBuffer buffer = new StringBuffer("");
 		buffer.append("<td class=''>");
@@ -257,6 +271,29 @@ public class AudioTagProcessor {
 		buffer.append("</a>");
 		buffer.append("</td>");
 
+		return buffer.toString();
+	}
+
+	public String parseActionData(String data, String action, String actionLabel, String css, String title) {
+
+		StringBuffer buffer = new StringBuffer("");
+		buffer.append("<td class='").append(css).append("' title='").append(title).append("' ");
+		if ("get_download".equalsIgnoreCase(action)) {
+			buffer.append("id='").append(data).append("' ");
+		}
+		buffer.append("onclick='").append(action).append("(\"").append(data).append("\");'>");
+		buffer.append(actionLabel);
+		buffer.append("</td>");
+		return buffer.toString();
+	}
+
+	public String parseActionData_BAK(String data, String action, String actionLabel, String css, String title) {
+
+		StringBuffer buffer = new StringBuffer("");
+		buffer.append("<td class='").append(css).append("' title='").append(title).append("' ");
+		buffer.append("onclick='").append(action).append("(\"").append(data).append("\");'>");
+		buffer.append(actionLabel);
+		buffer.append("</td>");
 		return buffer.toString();
 	}
 

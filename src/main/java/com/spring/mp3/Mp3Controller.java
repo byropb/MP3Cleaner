@@ -193,8 +193,6 @@ public class Mp3Controller {
 		MP3Processor mp3Processor = new MP3Processor();
 		try {
 			mp3Processor.renameMP3Directory(mp3Model);
-			// MP3CleanerOptions mp3Options = (MP3CleanerOptions)
-			// session.getAttribute("mp3Options");
 			MP3CleanerOptions mp3Options = new MP3CleanerOptions();
 			mp3Options.setSizeOption("on");
 			mp3Options.setModifiedOption("on");
@@ -204,8 +202,7 @@ public class Mp3Controller {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		// return "renamefiles";
-		return "fileslist";
+		return "fileslist"; // fileslist.jsp
 	}
 
 	@GetMapping("/api/data_get") // loads files list view as StringBuffer retval
@@ -223,10 +220,19 @@ public class Mp3Controller {
 		}
 
 		MP3CleanerOptions mp3Options = (MP3CleanerOptions) session.getAttribute("mp3Options");
+		// process rename view fields
 		if ("rename".equalsIgnoreCase(callerid)) { // dont show mp3 attributes on rename files screen
-			mp3Options = new MP3CleanerOptions();
-			mp3Options.setSizeOption("on");
-			mp3Options.setModifiedOption("on");
+			MP3CleanerOptions mp3OptionsLocal = new MP3CleanerOptions();
+			mp3OptionsLocal.setSizeOption("on");
+			mp3OptionsLocal.setModifiedOption("on");
+
+			if ("on".equalsIgnoreCase(mp3Options.getEditOption())) {
+				mp3OptionsLocal.setEditOption("on");
+			}
+			if ("on".equalsIgnoreCase(mp3Options.getDeleteOption())) {
+				mp3OptionsLocal.setDeleteOption("on");
+			}
+			mp3Options = mp3OptionsLocal;
 		}
 		retval = this.getAjaxDirectoryList(mp3Options, dirPath, filetype);
 		mp3Model.setResultBuffer(retval);
@@ -278,15 +284,64 @@ public class Mp3Controller {
 				.contentType(MediaType.parseMediaType(contentType)).body(resource);
 	}
 
+	@GetMapping("/edit/{filename:.+}/{newname:.+}")
+	public String renameFile(@ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @PathVariable String filename,
+			@PathVariable String newname) throws IOException {
+
+		fileStorageLocation = Paths.get(downloadPath);
+		String newfileName = this.restoreFileExtension(mp3Model, filename, newname);
+		if (filename.equalsIgnoreCase(newfileName)) { // nothing to delete
+			return "fileslist"; // fileslist.jsp
+		}
+		String filePath = this.fileStorageLocation.resolve(filename).normalize().toString();
+		String newfilePath = this.fileStorageLocation.resolve(newfileName).normalize().toString();
+		StringBuffer retval = new StringBuffer("");
+		try {
+			FileProcessor.copyFile(filePath, newfilePath, true);
+
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			retval.append("<span class='header'>Failed to rename file:</span><br/> ").append(filename).append("");
+		}
+		return "fileslist"; // fileslist.jsp
+	}
+
+	@GetMapping("/delete/{filename:.+}")
+	public String deleteFile(@ModelAttribute("mp3Model") MP3CleanerModel mp3Model, @PathVariable String filename) {
+
+		fileStorageLocation = Paths.get(downloadPath);
+		Path filePath = this.fileStorageLocation.resolve(filename).normalize();
+
+		StringBuffer retval = new StringBuffer("");
+		try {
+			boolean deleted = Files.deleteIfExists(filePath); // mp3Processor.deleteFile(filename);
+			if (true == deleted) {
+				retval.append("<span class='header'>The file deleted successfully:</span><br/>").append(filename).append("");
+				
+			} else {
+				retval.append("<span class='header'>Failed to delete file:</span><br/>").append(filename).append("");
+			}
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			retval.append("<span class='header'>Failed to delete file:</span> <br/>").append(filename).append("");
+		}
+		mp3Model.setResultBuffer(retval);
+		return "fileslist"; // fileslist.jsp
+	}
+
+	// ----------------------------
+
 	private StringBuffer getAjaxDirectoryList(MP3CleanerOptions mp3Options, String dirPath, String filetype) {
 
-		ArrayList<HashMap<String, String>> list = fileProcessor.readFileDirtory(dirPath, "asc");
 		StringBuffer buffer = new StringBuffer("");
 		try {
+			ArrayList<HashMap<String, String>> list = fileProcessor.readFileDirtory(dirPath, "asc");
 			buffer = audioTagProcessor.listMP3Dirtory(list, this.getFieldsHeaders(mp3Options), mp3Context, filetype);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			buffer.append(e.toString());
 		}
 
 		return buffer;
@@ -298,7 +353,7 @@ public class Mp3Controller {
 		if ("".equals(mp3Model.getFiletype())) {
 			mp3Model.setFiletype(".mp3");
 		}
-		//mp3Model.setFiletype("all");
+		// mp3Model.setFiletype("all");
 		int icount = mp3Model.getExtensions().size();
 		for (int i = 0; i < icount; i++) {
 			String option = mp3Model.getExtensions().get(i);
@@ -313,10 +368,35 @@ public class Mp3Controller {
 		return retval;
 	}
 
+	private String restoreFileExtension(MP3CleanerModel mp3Model, String origName, String newName) {
+
+		ArrayList<String> extlist = mp3Model.getExtensions();
+
+		String retval = "";
+		String extension = origName.substring(origName.lastIndexOf(".")); // original extension
+		int indexNew = newName.lastIndexOf(".");
+
+		if (indexNew == newName.length() - 1) {
+			retval = newName.substring(0, indexNew).concat(extension);
+			return retval;
+		}
+		if (0 < indexNew) { // dot is no
+
+			String extType = newName.substring(indexNew);
+			for (int i = 0; i < extlist.size(); i++) {
+				if (extType.equalsIgnoreCase(extlist.get(i))) {
+					retval = newName.substring(0, indexNew).concat(extension);
+					return retval;
+				}
+			}
+		}
+		retval = newName.concat(extension);
+		return retval;
+	}
+
+	// parse fields list of columns to show on data table
 	private ArrayList<String> getFieldsHeaders(MP3CleanerOptions mp3Options) {
-		// set columns order here
-		// to change column header set string like these samples "TRACK=TRACK_ID",
-		// "ALBUM=Album Name" or "ALBUM_ARTIST=Narrator"
+
 		ArrayList<String> fieldsList = new ArrayList<String>();
 		fieldsList.add("#=#");
 		fieldsList.add("NAME=NAME");
@@ -351,6 +431,13 @@ public class Mp3Controller {
 			fieldsList.add("LAST_MODIFIED=LAST MODIFIED");
 		}
 
+		if ("on".equalsIgnoreCase(mp3Options.getEditOption())) {
+			fieldsList.add("EDIT=EDIT");
+		}
+
+		if ("on".equalsIgnoreCase(mp3Options.getDeleteOption())) {
+			fieldsList.add("DELETE=DELETE");
+		}
 		return fieldsList;
 	}
 
@@ -380,30 +467,36 @@ public class Mp3Controller {
 	}
 
 	/***********************************/
-	// @Value("${upload.path}")
-	private String path;
 
-	@PostMapping("/upload") // example of file Upload
-							// https://medium.com/@AlexanderObregon/how-to-handle-file-uploads-and-downloads-with-spring-boot-84638463fd6f
-	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+	// @PostMapping("/upload" ) // example of file Upload
+	@PostMapping(value = "/upload", consumes = MediaType.ALL_VALUE)
+	public ResponseEntity<String> handleFileUpload(@RequestParam("uploadfile") MultipartFile[] files) {
 		try {
-			// Check if the file's content type is acceptable
-			if (!file.getContentType().equals("image/jpeg")) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-						.body("Invalid file type. Only JPEG files are allowed.");
+			/*
+			 * file size limit defined in application.properties
+			 * //spring.servlet.multipart.max-file-size=50MB
+			 * //spring.servlet.multipart.max-request-size=50MB
+			 */
+			fileStorageLocation = Paths.get(downloadPath);
+			StringBuffer buffer = new StringBuffer("<span class='header'>File(s) uploaded successfully:</span><br/>")
+					.append("<br/>");
+			int icount = files.length;
+			for (int i = 0; i < icount; i++) {
+				files[i].transferTo(new java.io.File(
+						fileStorageLocation.toString().concat("\\").concat(files[i].getOriginalFilename())));
+				buffer.append(files[i].getOriginalFilename()).append("<br/>");
 			}
+			/*
+			 * 
+			 * return ResponseEntity.
+			 * ok("<span class='header'>The file uploaded successfully:</span><br/>".concat(
+			 * file.getOriginalFilename()).concat(""));
+			 */
+			return ResponseEntity.ok(buffer.toString());
 
-			// Check the file's size
-			if (file.getSize() > 1_000_000) { // 1 MB limit
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is too large. The size limit is 1 MB.");
-			}
-
-			// Save the file to the server
-			file.transferTo(new java.io.File(path + file.getOriginalFilename()));
-			return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Could not upload the file: " + e.getMessage());
+					.body("Could not upload the file(s): " + e.getMessage());
 		}
 	}
 

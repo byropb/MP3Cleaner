@@ -88,10 +88,13 @@
       <tr>
        <td><input type='button' value='to dashboard'
         onclick="showObject('myModal', true); toDashboard('mp3cleaner');" class='button' title='go to dashboard' /></td>
-       <td style='text-align: center'>&nbsp;<input type='button' onclick='cleanup();' value='remove attributes'
-        title='remove attributes for all mp3 files in directory' /></td>
+
+       <td style='text-align: right'>
+       <input type='button' onclick='cleanup();' value='remove attributes' style='width:120px'
+        class='button' title='remove attributes for all mp3 files in directory' /></td>
+
        <td style='text-align: right'><input type='submit' value='set attributes' class='button'
-        title='set attributes for all mp3 files in current directory' /> 
+        title='set attributes for all mp3 files in current directory' />
      </table>
     </td>
    </tr>
@@ -222,26 +225,7 @@
 		}
 		resetSrc('container');
 	}
-
-  function get_download(filename) {
-  
-  	resetMedia();
-  	var container = document.getElementById("container");
-  	var fileurl = getContextUrl().concat("/download/").concat(filename);
-  	var filedock = document.createElement("audio");
-  	filedock.style.height = '50%';
-  	filedock.controls = true;
-  	filedock.autoplay = true;
-  	filedock.volume = 0.5;
-  	filedock.src = fileurl;
-  
-  	var span = document.createElement("span");
-  	span.innerHTML = filename;
-  	span.style.color = "green";
-  	container.appendChild(span);
-  	container.appendChild(filedock);
-  }
-  
+ 
   function downloadFile_example() { // where the download  requires implementaiton in web-controller. see annotation @GetMapping("/download/{filename:.+}")
       fetch("http://localhost:8082/mp3cleaner/download")
           .then(response => response.blob())
